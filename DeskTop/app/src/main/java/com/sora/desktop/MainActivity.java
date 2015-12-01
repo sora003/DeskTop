@@ -53,8 +53,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private List<Map<String,Object>> getData() {
-        Map<String, Object> map = new HashMap<String, Object>();
+
         for (int i = 0; i < icon.length; i++) {
+            Map<String, Object> map = new HashMap<String, Object>();
             map.put("image",icon[i]);
             map.put("text",iconName[i]);
             datalist.add(map);
