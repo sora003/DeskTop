@@ -8,9 +8,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.GridView;
+import android.widget.SimpleAdapter;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
+    private GridView gridView;
+    private List<Map<String,Object>> datalist;
+    private int[] icon = {R.drawable.address_book,R.drawable.calendar,R.drawable.camera,
+            R.drawable.clock,R.drawable.games_control,R.drawable.ic_launcher,R.drawable.messenger,
+            R.drawable.ringtone,R.drawable.settings,R.drawable.speech_balloon,R.drawable.weather,
+            R.drawable.world,R.drawable.youtube};
+    private String[] iconName = {"联系人", "日历", "照相机", "时钟", "游戏", "短信", "铃声",
+     "设置","语音", "天气","浏览器","Youtube"};
+    private SimpleAdapter simpleAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +42,26 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        gridView = (GridView) findViewById(R.id.gridView);
+        //准备数据源
+        //新建适配器
+        //GridView加载适配器
+        //GridView配置事件监听器
+        datalist = new ArrayList<Map<String, Object>>();
+        getData();
+        simpleAdapter = new SimpleAdapter(this,getData(),R.layout.item,new String[]{"image","text"},new int[]{R.id.item_image,R.id.item_text});
+        gridView.setAdapter(simpleAdapter);
     }
+
+    private List<Map<String,Object>> getData() {
+        for (int i = 0; i < icon.length; i++) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("image",icon[i]);
+            map.put("text",iconName[i]);
+        }
+            return datalist;
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
