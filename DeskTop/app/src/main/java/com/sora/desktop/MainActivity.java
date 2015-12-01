@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private GridView gridView;
     private List<Map<String,Object>> datalist;
     private int[] icon = {R.drawable.address_book,R.drawable.calendar,R.drawable.camera,
-            R.drawable.clock,R.drawable.games_control,R.drawable.ic_launcher,R.drawable.messenger,
+            R.drawable.clock,R.drawable.games_control,R.drawable.messenger,
             R.drawable.ringtone,R.drawable.settings,R.drawable.speech_balloon,R.drawable.weather,
             R.drawable.world,R.drawable.youtube};
     private String[] iconName = {"联系人", "日历", "照相机", "时钟", "游戏", "短信", "铃声",
@@ -48,16 +48,16 @@ public class MainActivity extends AppCompatActivity {
         //GridView加载适配器
         //GridView配置事件监听器
         datalist = new ArrayList<Map<String, Object>>();
-        getData();
         simpleAdapter = new SimpleAdapter(this,getData(),R.layout.item,new String[]{"image","text"},new int[]{R.id.item_image,R.id.item_text});
         gridView.setAdapter(simpleAdapter);
     }
 
     private List<Map<String,Object>> getData() {
+        Map<String, Object> map = new HashMap<String, Object>();
         for (int i = 0; i < icon.length; i++) {
-            Map<String, Object> map = new HashMap<String, Object>();
             map.put("image",icon[i]);
             map.put("text",iconName[i]);
+            datalist.add(map);
         }
             return datalist;
     }
